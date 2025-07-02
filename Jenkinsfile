@@ -1,11 +1,5 @@
 pipeline {
   agent any
-
-  environment {
-    DOCKER_IMAGE = 'yourdockerhubusername/my-app'
-    DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
-  }
-
   stages {
     stage('Checkout') {
       steps {
@@ -18,6 +12,7 @@ pipeline {
         script {
           docker.build("${DOCKER_IMAGE}:latest", '.')
         }
+
       }
     }
 
@@ -28,6 +23,7 @@ pipeline {
             docker.image("${DOCKER_IMAGE}:latest").push()
           }
         }
+
       }
     }
 
@@ -36,5 +32,10 @@ pipeline {
         sh 'kubectl apply -f k8s-deployment.yaml'
       }
     }
+
+  }
+  environment {
+    DOCKER_IMAGE = 'yourdockerhubusername/my-app'
+    DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
   }
 }
