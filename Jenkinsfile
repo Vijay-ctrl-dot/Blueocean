@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/yourusername/my-ci-cd-project.git'
+        git 'https://github.com/Vijay-ctrl-dot/Blueocean.git'
       }
     }
 
@@ -29,13 +29,13 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh 'kubectl apply -f k8s-deployment.yaml'
+        sh 'kubectl apply -f k85-deployment.yaml'
       }
     }
 
   }
   environment {
-    DOCKER_IMAGE = 'yourdockerhubusername/my-app'
-    DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
+    DOCKER_IMAGE = 'vijay9440/cabbooking'
+    DOCKER_CREDENTIALS_ID = 'vijay9440'
   }
 }
